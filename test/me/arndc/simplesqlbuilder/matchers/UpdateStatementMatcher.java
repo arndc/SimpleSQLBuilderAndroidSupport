@@ -1,7 +1,6 @@
 package me.arndc.simplesqlbuilder.matchers;
 
 import me.arndc.simplesqlbuilder.core.UpdateStatement;
-import me.arndc.simplesqlbuilder.core.UpdateStatement;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;

@@ -1,6 +1,13 @@
+# Simple SQL Builder with Android Support
+
 ## Synopsis
 
-The Simple SQL Builder brings a fluent api to build database statements and queries.
+The Simple SQL Builder brings a fluent api to build database statements and queries now supported for Android.
+This library does not use <i>not supported Java 8 features</i>. <a href="https://developer.android.com/guide/platform/j8-jack.html"> See which Java 8 features are supported on Android</a>
+
+## Prerequisites
+
+This library relies on the use of the <i>Jack Compiler</i>.
 
 ## Usage
    

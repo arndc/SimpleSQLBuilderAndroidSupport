@@ -1,13 +1,10 @@
 package me.arndc.simplesqlbuilder.matchers;
 
-import me.arndc.simplesqlbuilder.core.Column;
 import me.arndc.simplesqlbuilder.core.InsertStatement;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
-
-import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -15,7 +12,7 @@ import static org.hamcrest.CoreMatchers.is;
 public class InsertStatementMatcher extends TypeSafeDiagnosingMatcher<InsertStatement> {
     private InsertStatement expectedInsertStatement;
     private final Matcher<? super String> tableName;
-    private final Matcher<? super Map<Column, String>> valueCount;
+    private final Matcher<? super Integer> valueCount;
 
 
     private InsertStatementMatcher(InsertStatement expectedInsertStatement) {

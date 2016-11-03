@@ -4,8 +4,7 @@ package me.arndc.simplesqlbuilder.builders;
 import me.arndc.simplesqlbuilder.core.Column;
 import me.arndc.simplesqlbuilder.core.Query;
 import me.arndc.simplesqlbuilder.core.Table;
-
-import java.util.Arrays;
+import me.arndc.simplesqlbuilder.util.Transformer;
 
 /**
  * This builder class provides a fluent way to build a {@link Query}.
@@ -27,7 +26,7 @@ public final class QueryBuilder {
     }
 
     public QueryBuilder select(Column... columns) {
-        return select(Arrays.stream(columns).map(Column::getName).toArray(CharSequence[]::new));
+        return select(Transformer.columnsToColumnNames(columns));
     }
 
 
@@ -44,7 +43,7 @@ public final class QueryBuilder {
     }
 
     public QueryBuilder selectDistinct(Column... columns) {
-        return selectDistinct(Arrays.stream(columns).map(Column::getName).toArray(CharSequence[]::new));
+        return selectDistinct(Transformer.columnsToColumnNames(columns));
     }
 
 

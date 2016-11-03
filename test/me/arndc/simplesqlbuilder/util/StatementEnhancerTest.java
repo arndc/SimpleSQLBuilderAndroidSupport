@@ -3,15 +3,12 @@ package me.arndc.simplesqlbuilder.util;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
-/**
- * Created by ArneD on 27/10/16.
- */
 public class StatementEnhancerTest {
     @Test
     public void testTrimAStatementWithMultipleConsecutiveWhiteSpaces() throws Exception {
@@ -68,21 +65,10 @@ public class StatementEnhancerTest {
     @Test
     public void testEscapeADateValue() throws Exception {
         // Assign
-        LocalDate date =  LocalDate.of(2000, 12, 31);
-        Date value = Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        String expectedValue = "'2000-12-31'";
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.set(2000, Calendar.DECEMBER, 31);
 
-        // Act
-        String actualValue = StatementEnhancer.escapeValue(value);
-
-        // Assert
-        MatcherAssert.assertThat(actualValue, equalTo(expectedValue));
-    }
-
-    @Test
-    public void testEscapeALocalDateValue() throws Exception {
-        // Assign
-        LocalDate value =  LocalDate.of(2000, 12, 31);
+        Date value =  calendar.getTime();
         String expectedValue = "'2000-12-31'";
 
         // Act
@@ -98,7 +84,7 @@ public class StatementEnhancerTest {
         class CustomObject {
             private String customText;
 
-            public CustomObject(String customText) {
+            private CustomObject(String customText) {
                 this.customText = customText;
             }
 

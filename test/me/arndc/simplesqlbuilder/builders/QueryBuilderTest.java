@@ -8,7 +8,9 @@ import me.arndc.simplesqlbuilder.matchers.QueryMatcher;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -150,8 +152,16 @@ public class QueryBuilderTest {
     public void testBuildingAQueryByUsingTheWhereChainBuilder() throws Exception {
         // Arrange
         String val01 = "Value";
-        LocalDate date01 = LocalDate.of(2016, 11, 1);
-        LocalDate date02 = LocalDate.of(2017, 12, 2);
+
+        Calendar calendar1 = GregorianCalendar.getInstance();
+        calendar1.set(2016, Calendar.NOVEMBER, 1);
+
+        Calendar calendar2 = GregorianCalendar.getInstance();
+        calendar2.set(2017, Calendar.DECEMBER, 2);
+
+        Date date01 = calendar1.getTime();
+        Date date02 = calendar2.getTime();
+
 
         WhereChainBuilder whereChainBuilder = WhereChainBuilder.whereChain(testColumn1.is(Operator.equalsTo(val01))).and(testColumn1.is(Operator.between(date01, date02)));
 

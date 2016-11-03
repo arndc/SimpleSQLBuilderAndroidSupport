@@ -1,7 +1,6 @@
 package me.arndc.simplesqlbuilder.core;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import me.arndc.simplesqlbuilder.util.Transformer;
 
 /**
  * This class provides only static methods for doing arithmetic operations on columns.
@@ -11,12 +10,10 @@ import java.util.stream.Collectors;
  */
 public final class ArithmeticColumnOperation {
     public static String multiply(Column... columns) {
-        return Arrays.stream(columns)
-                .map(Column::getName)
-                .collect(Collectors.joining(" * "));
+        return multiply(Transformer.columnsToColumnNames(columns));
     }
 
     public static String multiply(CharSequence... columnNames) {
-        return String.join(" * ", columnNames);
+        return Transformer.joiner(columnNames, " * ");
     }
 }

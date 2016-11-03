@@ -1,5 +1,7 @@
 package me.arndc.simplesqlbuilder.core;
 
+import me.arndc.simplesqlbuilder.util.Transformer;
+
 import static me.arndc.simplesqlbuilder.util.StatementEnhancer.trim;
 
 /**
@@ -25,7 +27,7 @@ public final class Query implements Statement {
     }
 
     public void setSelect(CharSequence... columnNames) {
-        this.select = columnNames.length > 0 ? String.join(", ", columnNames) : "*";
+        this.select = columnNames.length > 0 ? Transformer.joiner(columnNames, ", ") : "*";
     }
 
     public void setFrom(String tableName) {

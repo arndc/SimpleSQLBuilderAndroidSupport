@@ -24,8 +24,8 @@ public class InsertStatementTest {
         // Assign
         String value1 = "val01", value2 = "val02";
         String expected = "INSERT INTO " + testTableName
-                + " (" + String.join(", ", testColumn1.getName(), testColumn2.getName()) + ")"
-                + " VALUES (" + String.join(", ", "'" + value1 + "'", "'" + value2 + "'") + ");";
+                + " (" + testColumn1.getName() + ", " + testColumn2.getName() + ")"
+                + " VALUES " + "('" + value1 + "', '" + value2 + "');";
 
         // Act
         InsertStatement insertStatement = new InsertStatement(testTableName);

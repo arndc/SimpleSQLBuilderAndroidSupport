@@ -1,10 +1,12 @@
 package me.arndc.simplesqlbuilder.core;
 
 import me.arndc.simplesqlbuilder.util.StatementEnhancer;
+import me.arndc.simplesqlbuilder.util.Transformer;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static me.arndc.simplesqlbuilder.util.StatementEnhancer.trim;
 
@@ -36,8 +38,13 @@ public final class InsertStatement implements Statement {
 
     @Override
     public String statement() {
-        String columns = this.values.keySet().stream().collect(Collectors.joining(", ", "(", ")"));
-        String values = this.values.values().stream().map(StatementEnhancer::escapeValue).collect(Collectors.joining(", ", "(", ")"));
+        List<String> valueList = new ArrayList<>();
+
+        for (Object o : values.values())
+            valueList.add(StatementEnhancer.escapeValue(o));
+
+        String columns = Transformer.joiner(values.keySet(), ", ", "(", ")");
+        String values = Transformer.joiner(valueList, ", ", "(", ")");
 
         String statement = "INSERT INTO " + tableName + " " + columns + " VALUES " + values + ";";
         return trim(statement);

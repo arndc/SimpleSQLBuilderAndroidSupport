@@ -1,11 +1,12 @@
 package me.arndc.simplesqlbuilder.core;
 
 import me.arndc.simplesqlbuilder.util.StatementEnhancer;
+import me.arndc.simplesqlbuilder.util.Transformer;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * This class represents the parts of an sql update statement.
@@ -48,9 +49,14 @@ public final class UpdateStatement implements Statement {
 
         String statement = "UPDATE " + tableName;
 
-        statement += " SET " + setters.entrySet().stream()
-                .map(entry -> entry.getKey() + " = " + entry.getValue())
-                .collect(Collectors.joining(", "));
+        statement += " SET ";
+
+        List<String> setList = new ArrayList<>();
+
+        for (Map.Entry<String, Object> entry : setters.entrySet())
+            setList.add(entry.getKey() + " = " + entry.getValue());
+
+        statement += Transformer.joiner(setList, ", ");
 
         if (whereClause == null || whereClause.length() == 0)
             statement += ";";
@@ -59,6 +65,4 @@ public final class UpdateStatement implements Statement {
 
         return StatementEnhancer.trim(statement);
     }
-
-
 }

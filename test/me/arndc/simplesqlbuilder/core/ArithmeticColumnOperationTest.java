@@ -33,7 +33,6 @@ public class ArithmeticColumnOperationTest {
         // Assert
         assertThat(actualOperation1, equalTo(expectedOperation));
         assertThat(actualOperation2, equalTo(expectedOperation));
-
     }
 
     @Test

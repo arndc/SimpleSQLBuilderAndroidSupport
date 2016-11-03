@@ -1,9 +1,9 @@
 package me.arndc.simplesqlbuilder.builders;
 
 import me.arndc.simplesqlbuilder.core.Column;
-import me.arndc.simplesqlbuilder.core.UpdateStatement;
 import me.arndc.simplesqlbuilder.core.Operator;
 import me.arndc.simplesqlbuilder.core.Table;
+import me.arndc.simplesqlbuilder.core.UpdateStatement;
 import me.arndc.simplesqlbuilder.matchers.UpdateStatementMatcher;
 import org.hamcrest.MatcherAssert;
 import org.junit.Before;

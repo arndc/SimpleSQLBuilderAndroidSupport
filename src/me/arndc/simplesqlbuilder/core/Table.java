@@ -1,9 +1,11 @@
 package me.arndc.simplesqlbuilder.core;
 
-import java.util.Arrays;
+import me.arndc.simplesqlbuilder.util.Transformer;
+
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static me.arndc.simplesqlbuilder.util.StatementEnhancer.trim;
 
@@ -28,8 +30,10 @@ public final class Table implements TableCommands {
     }
 
     public void addColumn(Column... columns) {
-        Map<String, Column> newColumns = Arrays.stream(columns)
-                .collect(Collectors.toMap(Column::getName, column -> column, (v1, v2) -> null, LinkedHashMap::new));
+        Map<String, Column> newColumns = new LinkedHashMap<>();
+
+        for (Column column : columns)
+            newColumns.put(column.getName(), column);
 
         this.columns.putAll(newColumns);
     }
@@ -50,9 +54,13 @@ public final class Table implements TableCommands {
     public String createStatement() {
         String statement = "CREATE TABLE " + this.name;
 
-        statement += "(";
-        statement += columns.values().stream().map(Column::createDefinition).collect(Collectors.joining(", "));
-        statement += ");";
+        List<CharSequence> definitions = new ArrayList<>();
+
+        for (Column column : columns.values())
+            definitions.add(column.createDefinition());
+
+
+        statement += Transformer.joiner(definitions.toArray(new CharSequence[]{}), ", ", "(", ");");
 
         return trim(statement);
     }

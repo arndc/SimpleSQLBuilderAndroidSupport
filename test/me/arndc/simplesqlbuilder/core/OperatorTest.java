@@ -3,13 +3,12 @@ package me.arndc.simplesqlbuilder.core;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
-import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
-/**
- * Created by ArneD on 24/10/16.
- */
 public class OperatorTest {
     @Test
     public void testOperatorBetweenTwoStrings() throws Exception {
@@ -28,13 +27,19 @@ public class OperatorTest {
     @Test
     public void testOperatorBetweenTwoDates() throws Exception {
         // Assign
-        LocalDate date1 = LocalDate.of(2016, 11, 1);
-        LocalDate date2 = LocalDate.of(2017, 12, 2);
+        Calendar calendar01 = GregorianCalendar.getInstance();
+        calendar01.set(2016, Calendar.NOVEMBER, 1);
+
+        Calendar calendar02 = GregorianCalendar.getInstance();
+        calendar02.set(2017, Calendar.DECEMBER, 2);
+
+        Date date01 = calendar01.getTime();
+        Date date02 = calendar02.getTime();
 
         String expected = String.format(" BETWEEN '%s' AND '%s'", "2016-11-01", "2017-12-02");
 
         // Act
-        Operator operator = Operator.between(date1, date2);
+        Operator operator = Operator.between(date01, date02);
         String actual = operator.execute();
 
         // Assert
