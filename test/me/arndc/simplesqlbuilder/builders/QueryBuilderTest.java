@@ -220,7 +220,7 @@ public class QueryBuilderTest {
         QueryBuilder builder = QueryBuilder.newQuery()
                                            .selectDistinctAll()
                                            .from(testTable)
-                                           .limitWithOffset(5, 1);
+                                           .limit(5, 1);
 
         Query query = builder.build();
 

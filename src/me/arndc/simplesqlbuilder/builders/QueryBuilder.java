@@ -77,7 +77,7 @@ public final class QueryBuilder {
         return this;
     }
 
-    public QueryBuilder limitWithOffset(long maxSize, long offset){
+    public QueryBuilder limit(long maxSize, long offset){
         query.setLimit(maxSize);
         query.setOffset(offset);
         return this;
