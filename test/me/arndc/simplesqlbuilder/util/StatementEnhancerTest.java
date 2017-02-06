@@ -68,7 +68,7 @@ public class StatementEnhancerTest {
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.set(2000, Calendar.DECEMBER, 31);
 
-        Date value =  calendar.getTime();
+        Date value = calendar.getTime();
         String expectedValue = "'2000-12-31'";
 
         // Act

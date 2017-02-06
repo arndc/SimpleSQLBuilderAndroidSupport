@@ -40,9 +40,9 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .selectAll()
-                .from(testTable.getName())
-                .where(testWhereClause);
+                                           .selectAll()
+                                           .from(testTable.getName())
+                                           .where(testWhereClause);
 
         Query query = builder.build();
 
@@ -60,9 +60,9 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .select(testColumnName)
-                .from(testTable)
-                .where(testWhereClause);
+                                           .select(testColumnName)
+                                           .from(testTable)
+                                           .where(testWhereClause);
 
         Query query = builder.build();
 
@@ -80,9 +80,9 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .select(testColumn1, testColumn1)
-                .from(testTable)
-                .where(testColumn1.is(Operator.between("one", "other")));
+                                           .select(testColumn1, testColumn1)
+                                           .from(testTable)
+                                           .where(testColumn1.is(Operator.between("one", "other")));
 
         Query query = builder.build();
 
@@ -100,8 +100,8 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .selectDistinct(testColumn1, testColumn1)
-                .from(testTable);
+                                           .selectDistinct(testColumn1, testColumn1)
+                                           .from(testTable);
 
         Query query = builder.build();
 
@@ -119,8 +119,8 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .selectDistinctAll()
-                .from(testTable);
+                                           .selectDistinctAll()
+                                           .from(testTable);
 
         Query query = builder.build();
 
@@ -138,9 +138,9 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .selectDistinctAll()
-                .from(testTable)
-                .orderBy(testColumn1, Query.Order.ASCENDING);
+                                           .selectDistinctAll()
+                                           .from(testTable)
+                                           .orderBy(testColumn1, Query.Order.ASCENDING);
 
         Query query = builder.build();
 
@@ -163,7 +163,8 @@ public class QueryBuilderTest {
         Date date02 = calendar2.getTime();
 
 
-        WhereChainBuilder whereChainBuilder = WhereChainBuilder.whereChain(testColumn1.is(Operator.equalsTo(val01))).and(testColumn1.is(Operator.between(date01, date02)));
+        WhereChainBuilder whereChainBuilder = WhereChainBuilder.whereChain(testColumn1.is(Operator.equalsTo(val01)))
+                                                               .and(testColumn1.is(Operator.between(date01, date02)));
 
         Query expectedQuery = new Query();
         expectedQuery.setSelect();
@@ -172,9 +173,9 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .selectDistinctAll()
-                .from(testTable)
-                .where(whereChainBuilder);
+                                           .selectDistinctAll()
+                                           .from(testTable)
+                                           .where(whereChainBuilder);
 
         Query query = builder.build();
 

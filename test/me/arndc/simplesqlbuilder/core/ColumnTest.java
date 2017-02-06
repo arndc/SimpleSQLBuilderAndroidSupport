@@ -17,7 +17,7 @@ public class ColumnTest {
         Column column = new Column(testColumnName, testColumnDataType);
 
         String expectedDefinition = String.format("%s %s",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -34,7 +34,7 @@ public class ColumnTest {
         column.setPrimaryKey(true);
 
         String expectedDefinition = String.format("%s %s PRIMARY KEY",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -51,7 +51,7 @@ public class ColumnTest {
         column.setAutoIncrement(true);
 
         String expectedDefinition = String.format("%s %s PRIMARY KEY AUTOINCREMENT",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -67,7 +67,7 @@ public class ColumnTest {
         column.setAutoIncrement(true);
 
         String expectedDefinition = String.format("%s %s",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -83,7 +83,7 @@ public class ColumnTest {
         column.setUnique(true);
 
         String expectedDefinition = String.format("%s %s UNIQUE",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -93,14 +93,15 @@ public class ColumnTest {
     }
 
     @Test
-    public void testCreateADefinitionWithAPrimaryKeyAndAUniqueConstraintShouldOnlyContainThePrimaryKey() throws Exception {
+    public void testCreateADefinitionWithAPrimaryKeyAndAUniqueConstraintShouldOnlyContainThePrimaryKey()
+            throws Exception {
         // Arrange
         Column column = new Column(testColumnName, testColumnDataType);
         column.setPrimaryKey(true);
         column.setUnique(true);
 
         String expectedDefinition = String.format("%s %s PRIMARY KEY",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -117,7 +118,7 @@ public class ColumnTest {
         column.setNotNull(true);
 
         String expectedDefinition = String.format("%s %s NOT NULL",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();

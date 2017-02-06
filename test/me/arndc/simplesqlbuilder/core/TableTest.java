@@ -30,9 +30,9 @@ public class TableTest {
         testColumn1.setPrimaryKey(true);
         testColumn1.setAutoIncrement(true);
         String expectedCreateStatement = String.format("CREATE TABLE %s(%s %s PRIMARY KEY AUTOINCREMENT, %s %s);",
-                testTableName,
-                testColumn1.getName(), testColumn1.getDataType(),
-                testColumn2.getName(), testColumn2.getDataType());
+                                                       testTableName,
+                                                       testColumn1.getName(), testColumn1.getDataType(),
+                                                       testColumn2.getName(), testColumn2.getDataType());
 
         // Act
         String createStatement = table.createStatement();

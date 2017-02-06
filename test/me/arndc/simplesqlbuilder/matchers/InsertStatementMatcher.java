@@ -10,15 +10,20 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
 public class InsertStatementMatcher extends TypeSafeDiagnosingMatcher<InsertStatement> {
-    private InsertStatement expectedInsertStatement;
     private final Matcher<? super String> tableName;
     private final Matcher<? super Integer> valueCount;
+    private InsertStatement expectedInsertStatement;
 
 
     private InsertStatementMatcher(InsertStatement expectedInsertStatement) {
         this.expectedInsertStatement = expectedInsertStatement;
         this.tableName = is(equalTo(expectedInsertStatement.getTableName()));
         this.valueCount = is(expectedInsertStatement.getInsertMap().size());
+    }
+
+    @Factory
+    public static InsertStatementMatcher isInsertStatement(InsertStatement expectedInsertStatement) {
+        return new InsertStatementMatcher(expectedInsertStatement);
     }
 
     @Override
@@ -31,10 +36,14 @@ public class InsertStatementMatcher extends TypeSafeDiagnosingMatcher<InsertStat
         }
 
         if (!valueCount.matches(insertStatement.getInsertMap().size())) {
-            MismatchReporter.reportMismatch("value-count", valueCount, insertStatement.getInsertMap().size(), description, matches);
+            MismatchReporter.reportMismatch("value-count",
+                                            valueCount,
+                                            insertStatement.getInsertMap().size(),
+                                            description,
+                                            matches);
             matches = false;
         }
-        
+
 
         return matches;
     }
@@ -44,11 +53,5 @@ public class InsertStatementMatcher extends TypeSafeDiagnosingMatcher<InsertStat
         description
                 .appendText(" a insert with table ")
                 .appendValue(expectedInsertStatement.getTableName());
-    }
-
-
-    @Factory
-    public static InsertStatementMatcher isInsertStatement(InsertStatement expectedInsertStatement) {
-        return new InsertStatementMatcher(expectedInsertStatement);
     }
 }

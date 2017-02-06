@@ -24,7 +24,7 @@ public class ArithmeticColumnOperationTest {
     public void testMultiplyingTwoColumns() throws Exception {
         // Arrange
         String expectedOperation = String.format("%s * %s",
-                testColumn1.getName(), testColumn2.getName());
+                                                 testColumn1.getName(), testColumn2.getName());
 
         // Act
         String actualOperation1 = ArithmeticColumnOperation.multiply(testColumn1, testColumn2);
@@ -39,11 +39,12 @@ public class ArithmeticColumnOperationTest {
     public void testMultiplyingMoreThanTwoColumns() throws Exception {
         // Arrange
         String expectedOperation = String.format("%s * %s * %s",
-                testColumn1.getName(), testColumn3.getName(), testColumn2.getName());
+                                                 testColumn1.getName(), testColumn3.getName(), testColumn2.getName());
 
         // Act
         String actualOperation1 = ArithmeticColumnOperation.multiply(testColumn1, testColumn3, testColumn2);
-        String actualOperation2 = ArithmeticColumnOperation.multiply(testColumn1.getName(), testColumn3.getName(), testColumn2.getName());
+        String actualOperation2 = ArithmeticColumnOperation
+                .multiply(testColumn1.getName(), testColumn3.getName(), testColumn2.getName());
 
         // Assert
         assertThat(actualOperation1, equalTo(expectedOperation));
