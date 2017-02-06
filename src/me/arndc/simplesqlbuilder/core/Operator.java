@@ -14,7 +14,6 @@ public final class Operator {
         this.operation = operation;
     }
 
-    // todo all sort of values (string, int, dates...)
     public static Operator between(Object value, Object otherValue) {
         return new Operator(" BETWEEN " + escapeValue(value) + " AND " + escapeValue(otherValue));
     }
