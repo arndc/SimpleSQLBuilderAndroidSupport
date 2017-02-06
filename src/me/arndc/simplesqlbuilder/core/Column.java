@@ -11,6 +11,7 @@ public final class Column {
     private boolean primaryKey;
     private boolean autoIncrement;
     private boolean unique;
+    private boolean notNull;
 
     public Column(String name, String dataType) {
         this.name = name;
@@ -25,11 +26,6 @@ public final class Column {
     public void setAutoIncrement(boolean autoIncrement) {
         this.autoIncrement = autoIncrement;
     }
-
-    public void setUnique(boolean unique) {
-        this.unique = unique;
-    }
-
 
     public String getName() {
         return name;
@@ -51,19 +47,34 @@ public final class Column {
         return unique;
     }
 
+    public void setUnique(boolean unique) {
+        this.unique = unique;
+    }
+
+    public boolean isNotNull() {
+        return notNull;
+    }
+
+    public void setNotNull(boolean notNull) {
+        this.notNull = notNull;
+    }
 
     String createDefinition() {
-        String declaration = String.format("%s %s", this.name, this.dataType);
+        String definition = String.format("%s %s", this.name, this.dataType);
 
         if (primaryKey) {
-            declaration += " PRIMARY KEY";
+            definition += " PRIMARY KEY";
             if (autoIncrement)
-                declaration += " AUTOINCREMENT";
+                definition += " AUTOINCREMENT";
         } else if (unique) {
-            declaration += " UNIQUE";
+            definition += " UNIQUE";
         }
 
-        return declaration;
+        if (notNull) {
+            definition += " NOT NULL";
+        }
+
+        return definition;
     }
 
 
@@ -74,4 +85,5 @@ public final class Column {
     public String is(Operator operator) {
         return " " + this.name + operator.execute();
     }
+
 }

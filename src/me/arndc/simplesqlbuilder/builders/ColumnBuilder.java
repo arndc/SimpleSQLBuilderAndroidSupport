@@ -15,6 +15,9 @@ public final class ColumnBuilder {
         column = new Column(name, dataType);
     }
 
+    public static ColumnBuilder newColumn(String name, String dataType) {
+        return new ColumnBuilder(name, dataType);
+    }
 
     public ColumnBuilder hasPrimaryKey() {
         column.setPrimaryKey(true);
@@ -31,6 +34,10 @@ public final class ColumnBuilder {
         return this;
     }
 
+    public ColumnBuilder isNotNull() {
+        column.setNotNull(true);
+        return this;
+    }
 
     public Column build() {
         if (column.hasPrimaryKey())
@@ -40,9 +47,5 @@ public final class ColumnBuilder {
             column.setAutoIncrement(false);
 
         return column;
-    }
-
-    public static ColumnBuilder newColumn(String name, String dataType) {
-        return new ColumnBuilder(name, dataType);
     }
 }

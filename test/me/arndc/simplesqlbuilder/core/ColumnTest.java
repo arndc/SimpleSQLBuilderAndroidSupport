@@ -108,4 +108,22 @@ public class ColumnTest {
         // Assert
         assertThat(definition, equalTo(expectedDefinition));
     }
+
+
+    @Test
+    public void testCreateADefinitionThatIsNotNull() throws Exception {
+        // Arrange
+        Column column = new Column(testColumnName, testColumnDataType);
+        column.setNotNull(true);
+
+        String expectedDefinition = String.format("%s %s NOT NULL",
+                testColumnName, testColumnDataType);
+
+        // Act
+        String definition = column.createDefinition();
+
+        // Assert
+        assertThat(definition, equalTo(expectedDefinition));
+    }
+
 }

@@ -182,5 +182,49 @@ public class QueryBuilderTest {
         assertThat(query, is(QueryMatcher.isQuery(expectedQuery)));
     }
 
+    @Test
+    public void testBuildingAQueryWithLimit() throws Exception {
+        // Assign
+        long limit = 5;
 
+        Query expectedQuery = new Query();
+        expectedQuery.setSelect();
+        expectedQuery.setFrom(testTable.getName());
+        expectedQuery.setLimit(limit);
+
+        // Act
+        QueryBuilder builder = QueryBuilder.newQuery()
+                                           .selectDistinctAll()
+                                           .from(testTable)
+                                           .limit(5);
+
+        Query query = builder.build();
+
+        // Assert
+        assertThat(query, is(QueryMatcher.isQuery(expectedQuery)));
+    }
+
+    @Test
+    public void testBuildingAQueryWithLimitAndOffset() throws Exception {
+        // Assign
+        long limit = 5;
+        long offset = 1;
+
+        Query expectedQuery = new Query();
+        expectedQuery.setSelect();
+        expectedQuery.setFrom(testTable.getName());
+        expectedQuery.setLimit(limit);
+        expectedQuery.setOffset(offset);
+
+        // Act
+        QueryBuilder builder = QueryBuilder.newQuery()
+                                           .selectDistinctAll()
+                                           .from(testTable)
+                                           .limitWithOffset(5, 1);
+
+        Query query = builder.build();
+
+        // Assert
+        assertThat(query, is(QueryMatcher.isQuery(expectedQuery)));
+    }
 }

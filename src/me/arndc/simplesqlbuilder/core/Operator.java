@@ -14,11 +14,6 @@ public final class Operator {
         this.operation = operation;
     }
 
-
-    String execute() {
-        return operation;
-    }
-
     // todo all sort of values (string, int, dates...)
     public static Operator between(Object value, Object otherValue) {
         return new Operator(" BETWEEN " + escapeValue(value) + " AND " + escapeValue(otherValue));
@@ -26,5 +21,9 @@ public final class Operator {
 
     public static Operator equalsTo(Object value) {
         return new Operator(" = " + escapeValue(value));
+    }
+
+    String execute() {
+        return operation;
     }
 }

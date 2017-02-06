@@ -5,7 +5,10 @@ import me.arndc.simplesqlbuilder.core.Column;
 import java.util.Collection;
 
 public class Transformer {
-    public static CharSequence[] columnsToColumnNames(Column[] columns){
+    private Transformer() {
+    }
+
+    public static CharSequence[] columnsToColumnNames(Column[] columns) {
         CharSequence[] columnNames = new String[columns.length];
 
         for (int i = 0; i < columns.length; i++)
@@ -14,29 +17,29 @@ public class Transformer {
         return columnNames;
     }
 
-    public static String joiner(CharSequence[] values, String delimiter){
-        String joinedString = "";
+    public static String joiner(CharSequence[] values, String delimiter) {
+        StringBuilder joinedString = new StringBuilder();
 
         for (int i = 0; i < values.length; i++) {
-            joinedString += values[i];
+            joinedString.append(values[i]);
 
-            if (i < (values.length -1))
-                joinedString += delimiter;
+            if (i < (values.length - 1))
+                joinedString.append(delimiter);
         }
 
-        return joinedString;
+        return joinedString.toString();
     }
 
 
-    public static String joiner(CharSequence[] values, String delimiter, String prefix, String suffix){
+    public static String joiner(CharSequence[] values, String delimiter, String prefix, String suffix) {
         return prefix + joiner(values, delimiter) + suffix;
     }
 
-    public static String joiner(Collection<String> values, String delimiter){
+    public static String joiner(Collection<String> values, String delimiter) {
         return joiner(values.toArray(new CharSequence[]{}), delimiter);
     }
 
-    public static String joiner(Collection<String> values, String delimiter, String prefix, String suffix){
+    public static String joiner(Collection<String> values, String delimiter, String prefix, String suffix) {
         return prefix + joiner(values, delimiter) + suffix;
     }
 }

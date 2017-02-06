@@ -24,6 +24,7 @@ public class InsertStatementBuilderTest {
     }
 
     @Test
+    @Deprecated
     public void testBuildingAnInsertStatement() throws Exception {
         // Arrange
         String value1 = "val01", value2 = "val02";
@@ -36,6 +37,28 @@ public class InsertStatementBuilderTest {
                 .insertInto(testTable)
                 .withValue(testColumn1, value1)
                 .withValue(testColumn2, value2);
+
+        InsertStatement actual = builder.build();
+
+        // Assert
+        MatcherAssert.assertThat(actual, InsertStatementMatcher.isInsertStatement(expected));
+    }
+
+    @Test
+    public void testBuildingAnInsertStatementWithMultipleValueLines() throws Exception {
+        // Arrange
+        String value1 = "val01", value2 = "val02", value3 = "val03", value4 = "val04";
+
+        InsertStatement expected = new InsertStatement(testTable.getName());
+        expected.addValue(testColumn1.getName(), value1);
+        expected.addValue(testColumn2.getName(), value2);
+
+        // Act
+        InsertStatementBuilder builder = InsertStatementBuilder
+                .insertInto(testTable)
+                .inColumns(testColumn1, testColumn2)
+                .withValues(value1, value2)
+                .withValues(value3, value4);
 
         InsertStatement actual = builder.build();
 

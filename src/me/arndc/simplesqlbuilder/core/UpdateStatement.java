@@ -27,11 +27,6 @@ public final class UpdateStatement implements Statement {
         this.setters.put(columnName, StatementEnhancer.escapeValue(value));
     }
 
-    public void setWhereClause(String whereClause) {
-        this.whereClause = whereClause;
-    }
-
-
     public String getTableName() {
         return tableName;
     }
@@ -42,6 +37,10 @@ public final class UpdateStatement implements Statement {
 
     public String getWhereClause() {
         return whereClause;
+    }
+
+    public void setWhereClause(String whereClause) {
+        this.whereClause = whereClause;
     }
 
     @Override

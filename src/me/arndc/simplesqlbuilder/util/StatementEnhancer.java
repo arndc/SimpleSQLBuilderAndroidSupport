@@ -22,6 +22,7 @@ public final class StatementEnhancer {
         if (value instanceof String) return "'" + ((String) value).replaceAll("'", "''") + "'";
         else if (value instanceof Date) return formatDate((Date) value);
         else if (value instanceof Number) return value.toString();
+        else if (value == null) return "null";
         else return escapeValue(value.toString());
     }
 

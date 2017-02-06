@@ -18,7 +18,7 @@ public class InsertStatementMatcher extends TypeSafeDiagnosingMatcher<InsertStat
     private InsertStatementMatcher(InsertStatement expectedInsertStatement) {
         this.expectedInsertStatement = expectedInsertStatement;
         this.tableName = is(equalTo(expectedInsertStatement.getTableName()));
-        this.valueCount = is(expectedInsertStatement.getValues().size());
+        this.valueCount = is(expectedInsertStatement.getInsertMap().size());
     }
 
     @Override
@@ -30,8 +30,8 @@ public class InsertStatementMatcher extends TypeSafeDiagnosingMatcher<InsertStat
             matches = false;
         }
 
-        if (!valueCount.matches(insertStatement.getValues().size())) {
-            MismatchReporter.reportMismatch("value-count", valueCount, insertStatement.getValues().size(), description, matches);
+        if (!valueCount.matches(insertStatement.getInsertMap().size())) {
+            MismatchReporter.reportMismatch("value-count", valueCount, insertStatement.getInsertMap().size(), description, matches);
             matches = false;
         }
         
